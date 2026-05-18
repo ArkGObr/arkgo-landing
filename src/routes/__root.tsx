@@ -79,9 +79,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Delivery, mototáxi, transporte de passageiros, fretes e cargas em um único ecossistema." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon.png",
+      },
       {
         rel: "stylesheet",
         href: appCss,
