@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      arkgo_leads: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string
+          id: string
+          interest: string
+          message: string | null
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          interest?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          interest?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
