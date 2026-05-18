@@ -1,19 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import {
   Zap, MapPin, CreditCard, Brain, Globe2, Rocket,
   Bike, Car, Truck, Package, Navigation, ShieldCheck,
-  Activity, Wallet, Instagram, ArrowRight, Play, Menu,
+  Activity, Wallet, Instagram, Play, Menu,
   CheckCircle2, Sparkles, Radio, Cpu,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { submitLead } from "@/lib/leads.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 import logo from "@/assets/arkgo-logo.png";
 import heroBrand from "@/assets/arkgo-hero.png";
 import appShot from "@/assets/arkgo-app.jpeg";
+import appPhone from "@/assets/arkgo-app-phone.jpeg";
 import cityBg from "@/assets/arkgo-city.jpg";
 
 export const Route = createFileRoute("/")({
@@ -44,9 +44,9 @@ function Nav() {
         </nav>
         <a
           href="#contato"
-          className="hidden md:inline-flex items-center gap-2 bg-neon text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition glow-neon"
+          className="hidden md:inline-flex appearance-none border-0 items-center gap-2 bg-neon text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition glow-neon"
         >
-          Entrar na fila <ArrowRight className="size-4" />
+          Entrar na fila
         </a>
         <button className="md:hidden text-foreground"><Menu /></button>
       </div>
@@ -83,7 +83,7 @@ function Hero() {
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#contato"
-              className="inline-flex items-center gap-2 bg-neon text-primary-foreground px-7 py-3.5 rounded-full font-semibold animate-pulse-glow hover:scale-[1.02] transition"
+              className="inline-flex appearance-none border-0 items-center gap-2 bg-neon text-primary-foreground px-7 py-3.5 rounded-full font-semibold animate-pulse-glow hover:scale-[1.02] transition"
             >
               <Rocket className="size-4" /> Baixar aplicativo
             </a>
@@ -112,7 +112,7 @@ function Hero() {
         <div className="relative">
           <div className="absolute -inset-10 bg-neon/20 blur-3xl rounded-full" />
           <div className="relative animate-float">
-            <img src={appShot} alt="App ArkGo" className="relative mx-auto max-h-[640px] rounded-[2.5rem] shadow-2xl" />
+            <img src={appPhone} alt="App ArkGo" className="relative mx-auto max-h-[640px] rounded-[2.5rem] shadow-2xl" />
             <div className="absolute -bottom-4 -left-4 bg-card border border-neon/40 rounded-2xl p-3 backdrop-blur glow-neon">
               <div className="flex items-center gap-2 text-xs">
                 <Radio className="size-4 text-neon animate-pulse" />
@@ -212,7 +212,7 @@ function Apps() {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="relative order-2 lg:order-1">
           <div className="absolute -inset-10 bg-neon/20 blur-3xl rounded-full" />
-          <img src={appShot} alt="App do Cliente" className="relative max-h-[600px] mx-auto rounded-[2.5rem] border border-border" loading="lazy" />
+          <img src={appPhone} alt="App do Cliente" className="relative max-h-[600px] mx-auto rounded-[2.5rem] border border-border" loading="lazy" />
         </div>
         <div className="order-1 lg:order-2">
           <p className="text-neon text-sm font-semibold uppercase tracking-[0.2em] mb-3">Apps ArkGo</p>
@@ -234,6 +234,27 @@ function Apps() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BrandShowcase() {
+  return (
+    <section className="py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="max-w-2xl mb-10">
+          <p className="text-neon text-sm font-semibold uppercase tracking-[0.2em] mb-3">Identidade ArkGo</p>
+          <h2 className="text-4xl md:text-5xl font-bold">A marca pronta para rodar.</h2>
+        </div>
+        <div className="relative overflow-hidden rounded-[2rem] border border-neon/30 glow-neon bg-card">
+          <img
+            src={heroBrand}
+            alt="Identidade visual ArkGo com app, serviços, cores e frota"
+            className="w-full object-cover"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>
@@ -281,8 +302,19 @@ function Founder() {
         <div className="absolute -top-20 -right-20 size-80 bg-neon/20 blur-3xl rounded-full" />
         <div className="relative grid md:grid-cols-[280px_1fr] gap-10 items-start">
           <div>
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-neon/30 to-card border border-neon/40 flex items-center justify-center text-7xl font-extrabold gradient-text glow-neon">
-              CA
+            <div className="relative aspect-square rounded-3xl bg-gradient-to-br from-neon/30 to-card border border-neon/40 overflow-hidden glow-neon">
+              <div className="h-full w-full flex items-center justify-center text-7xl font-extrabold gradient-text">
+                CA
+              </div>
+              <img
+                src="/fundador-carlos.jpg"
+                alt="Carlos André Gomes, fundador da ArkGo"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
+              />
             </div>
             <a
               href="https://www.instagram.com/oreidodeliverybr?igsh=MWR4bXVkdWt4bHpoZA%3D%3D"
@@ -319,7 +351,6 @@ function Founder() {
 }
 
 function LeadForm() {
-  const submit = useServerFn(submitLead);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", city: "",
@@ -331,7 +362,17 @@ function LeadForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      await submit({ data: form });
+      const { error } = await supabase.from("arkgo_leads").insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim() || null,
+        city: form.city.trim() || null,
+        interest: form.interest,
+        message: form.message.trim() || null,
+      });
+
+      if (error) throw error;
+
       toast.success("Recebido! Em breve entraremos em contato.");
       setForm({ name: "", email: "", phone: "", city: "", interest: "fila", message: "" });
     } catch (err) {
@@ -386,7 +427,7 @@ function LeadForm() {
                 <button
                   key={o.v} type="button"
                   onClick={() => setForm({ ...form, interest: o.v })}
-                  className={`px-4 py-2 rounded-full text-sm border transition ${
+                  className={`appearance-none px-4 py-2 rounded-full text-sm border transition ${
                     form.interest === o.v
                       ? "bg-neon text-primary-foreground border-neon glow-neon"
                       : "border-border text-muted-foreground hover:border-neon/50 hover:text-foreground"
@@ -403,9 +444,9 @@ function LeadForm() {
           </div>
           <button
             type="submit" disabled={loading}
-            className="mt-2 inline-flex items-center justify-center gap-2 bg-neon text-primary-foreground px-7 py-4 rounded-xl font-semibold hover:opacity-90 transition disabled:opacity-50"
+            className="mt-2 inline-flex appearance-none border-0 items-center justify-center gap-2 bg-neon text-primary-foreground px-7 py-4 rounded-xl font-semibold hover:opacity-90 transition disabled:opacity-50"
           >
-            {loading ? "Enviando..." : (<>Enviar <ArrowRight className="size-4" /></>)}
+            {loading ? "Enviando..." : "Enviar"}
           </button>
           <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5">
             <CheckCircle2 className="size-3.5 text-neon" /> Seus dados são protegidos e usados apenas para contato.
@@ -430,8 +471,8 @@ function CTAFinal() {
           <p className="mt-5 text-lg opacity-80 max-w-xl mx-auto">
             ArkGo. O futuro da mobilidade urbana brasileira.
           </p>
-          <a href="#contato" className="mt-10 inline-flex items-center gap-2 bg-ink text-foreground px-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition">
-            Entrar na fila agora <ArrowRight className="size-4" />
+          <a href="#contato" className="mt-10 inline-flex appearance-none border-0 items-center gap-2 bg-ink text-foreground px-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition">
+            Entrar na fila agora
           </a>
         </div>
       </div>
@@ -460,6 +501,7 @@ function Landing() {
         <Services />
         <Tech />
         <Apps />
+        <BrandShowcase />
         <Differentials />
         <Founder />
         <LeadForm />
