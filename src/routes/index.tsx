@@ -12,7 +12,6 @@ import { supabase } from "@/integrations/supabase/client";
 
 import logo from "@/assets/arkgo-logo.png";
 import heroBrand from "@/assets/arkgo-hero.png";
-import appShot from "@/assets/arkgo-app.jpeg";
 import appPhone from "@/assets/arkgo-app-phone.jpeg";
 import cityBg from "@/assets/arkgo-city.jpg";
 
