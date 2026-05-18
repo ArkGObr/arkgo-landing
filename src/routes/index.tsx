@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Zap, MapPin, CreditCard, Brain, Globe2, Rocket,
   Bike, Car, Truck, Package, Navigation, ShieldCheck,
@@ -295,21 +295,35 @@ function Differentials() {
 }
 
 function Founder() {
+  const [founderImageLoaded, setFounderImageLoaded] = useState(false);
+
   return (
     <section id="fundador" className="py-28 px-6">
       <div className="max-w-6xl mx-auto rounded-[2rem] border border-border bg-card/60 backdrop-blur p-10 md:p-16 relative overflow-hidden">
         <div className="absolute -top-20 -right-20 size-80 bg-neon/20 blur-3xl rounded-full" />
         <div className="relative grid md:grid-cols-[280px_1fr] gap-10 items-start">
           <div>
-            <div className="relative aspect-square rounded-3xl bg-gradient-to-br from-neon/30 to-card border border-neon/40 overflow-hidden glow-neon">
-              <div className="h-full w-full flex items-center justify-center text-7xl font-extrabold gradient-text">
+            <div
+              className="relative aspect-square rounded-3xl bg-gradient-to-br from-neon/30 to-card border border-neon/40 overflow-hidden glow-neon"
+              aria-label="Carlos André Gomes, fundador da ArkGo"
+            >
+              <div className="absolute inset-0 -z-0 bg-gradient-to-br from-neon/15 via-transparent to-card/70" />
+              <div
+                className={`relative h-full w-full flex items-center justify-center text-7xl font-extrabold gradient-text transition-opacity ${
+                  founderImageLoaded ? "opacity-0" : "opacity-100"
+                }`}
+              >
                 CA
               </div>
               <img
                 src="/fundador-carlos.jpg"
-                alt="Carlos André Gomes, fundador da ArkGo"
-                className="absolute inset-0 h-full w-full object-cover"
+                alt=""
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity ${
+                  founderImageLoaded ? "opacity-100" : "opacity-0"
+                }`}
+                decoding="async"
                 loading="lazy"
+                onLoad={() => setFounderImageLoaded(true)}
                 onError={(event) => {
                   event.currentTarget.style.display = "none";
                 }}
@@ -491,6 +505,21 @@ function Footer() {
 }
 
 function Landing() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    scrollToTop();
+    window.requestAnimationFrame(scrollToTop);
+    window.setTimeout(scrollToTop, 0);
+  }, []);
+
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Toaster theme="dark" position="top-center" />
