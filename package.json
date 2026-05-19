@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "postbuild": "node scripts/create-vercel-index.mjs",
+    "build": "vite build --config vite.config.spa.ts",
+    "build:ssr": "vite build && node scripts/create-vercel-index.mjs",
     "build:dev": "vite build --mode development",
-    "preview": "vite preview",
+    "preview": "vite preview --config vite.config.spa.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

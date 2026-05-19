@@ -1,14 +1,10 @@
-﻿import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -68,53 +64,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ArkGo — Mobilidade urbana em um novo nível" },
-      { name: "description", content: "A ArkGo conecta pessoas, entregas e serviços através de tecnologia moderna, rápida e inteligente. Uma plataforma. Todas as rotas." },
-      { name: "author", content: "ArkGo" },
-      { property: "og:title", content: "ArkGo — Mobilidade urbana em um novo nível" },
-      { property: "og:description", content: "Delivery, mototáxi, transporte de passageiros, fretes e cargas em um único ecossistema." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "icon",
-        type: "image/png",
-        href: "/favicon.png",
-      },
-      {
-        rel: "apple-touch-icon",
-        href: "/favicon.png",
-      },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
