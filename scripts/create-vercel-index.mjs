@@ -1,4 +1,4 @@
-import { readFile, readdir, writeFile } from "node:fs/promises";
+﻿import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const clientDir = "dist/client";
@@ -27,6 +27,11 @@ const html = `<!doctype html>
     <meta name="description" content="Plataforma completa de mobilidade urbana: delivery, mototáxi, transporte, fretes e cargas." />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+    <script>
+      history.scrollRestoration = "manual";
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+      scrollTo(0, 0);
+    </script>
     ${cssFiles.map((file) => `<link rel="stylesheet" href="/assets/${file}" />`).join("\n    ")}
   </head>
   <body>
