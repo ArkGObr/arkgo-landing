@@ -18,9 +18,9 @@ import cityBg from "@/assets/arkgo-city.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ArkGo â€” Mobilidade urbana em um novo nÃ­vel" },
-      { name: "description", content: "Plataforma completa de mobilidade urbana: delivery, mototÃ¡xi, transporte, fretes e cargas. Uma plataforma. Todas as rotas." },
-      { property: "og:title", content: "ArkGo â€” Mobilidade urbana em um novo nÃ­vel" },
+      { title: "ArkGo — Mobilidade urbana em um novo nível" },
+      { name: "description", content: "Plataforma completa de mobilidade urbana: delivery, mototáxi, transporte, fretes e cargas. Uma plataforma. Todas as rotas." },
+      { property: "og:title", content: "ArkGo — Mobilidade urbana em um novo nível" },
       { property: "og:description", content: "Uma plataforma. Todas as rotas." },
     ],
   }),
@@ -35,7 +35,7 @@ function Nav() {
           <img src={logo} alt="ArkGo" className="h-8 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#servicos" className="hover:text-foreground transition">ServiÃ§os</a>
+          <a href="#servicos" className="hover:text-foreground transition">Serviços</a>
           <a href="#tecnologia" className="hover:text-foreground transition">Tecnologia</a>
           <a href="#apps" className="hover:text-foreground transition">Apps</a>
           <a href="#fundador" className="hover:text-foreground transition">Fundador</a>
@@ -68,15 +68,15 @@ function Hero() {
       <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neon/40 bg-neon/5 text-neon text-xs font-medium mb-6">
-            <Sparkles className="size-3.5" /> A nova geraÃ§Ã£o da mobilidade urbana
+            <Sparkles className="size-3.5" /> A nova geração da mobilidade urbana
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
             Mobilidade urbana<br/>
-            em um <span className="gradient-text text-glow">novo nÃ­vel</span>.
+            em um <span className="gradient-text text-glow">novo nível</span>.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            A ArkGo conecta pessoas, entregas e serviÃ§os atravÃ©s de uma tecnologia
-            moderna, rÃ¡pida e inteligente. Uma plataforma. Todas as rotas.
+            A ArkGo conecta pessoas, entregas e serviços através de uma tecnologia
+            moderna, rápida e inteligente. Uma plataforma. Todas as rotas.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -96,7 +96,7 @@ function Hero() {
 
           <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
             {[
-              { v: "+1,5M", l: "OperaÃ§Ãµes" },
+              { v: "+1,5M", l: "Operações" },
               { v: "9", l: "Estados" },
               { v: "24/7", l: "Tempo real" },
             ].map((s) => (
@@ -133,10 +133,10 @@ function Hero() {
 
 function Services() {
   const items = [
-    { icon: Car, t: "Passageiros", d: "Corridas rÃ¡pidas e seguras." },
+    { icon: Car, t: "Passageiros", d: "Corridas rápidas e seguras." },
     { icon: Package, t: "Delivery", d: "Entregas em tempo real." },
-    { icon: Bike, t: "MototÃ¡xi", d: "Mobilidade Ã¡gil para o dia a dia." },
-    { icon: Truck, t: "UtilitÃ¡rios", d: "Fretes e logÃ­stica urbana." },
+    { icon: Bike, t: "Mototáxi", d: "Mobilidade ágil para o dia a dia." },
+    { icon: Truck, t: "Utilitários", d: "Fretes e logística urbana." },
   ];
   return (
     <section id="servicos" className="relative py-28 px-6">
@@ -166,10 +166,10 @@ function Services() {
 
 function Tech() {
   const features = [
-    { icon: Navigation, t: "GPS de alta precisÃ£o", d: "Rotas otimizadas em tempo real." },
+    { icon: Navigation, t: "GPS de alta precisão", d: "Rotas otimizadas em tempo real." },
     { icon: Brain, t: "IA aplicada", d: "Match inteligente motorista x demanda." },
-    { icon: ShieldCheck, t: "SeguranÃ§a total", d: "VerificaÃ§Ã£o e monitoramento 24/7." },
-    { icon: Cpu, t: "Infra escalÃ¡vel", d: "OperaÃ§Ã£o fluida em qualquer escala." },
+    { icon: ShieldCheck, t: "Segurança total", d: "Verificação e monitoramento 24/7." },
+    { icon: Cpu, t: "Infra escalável", d: "Operação fluida em qualquer escala." },
   ];
   return (
     <section id="tecnologia" className="relative py-28 px-6 overflow-hidden">
@@ -178,11 +178,11 @@ function Tech() {
         <div>
           <p className="text-neon text-sm font-semibold uppercase tracking-[0.2em] mb-3">Tecnologia ArkGo</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            ConstruÃ­da para <span className="gradient-text">cidades modernas</span>.
+            Construída para <span className="gradient-text">cidades modernas</span>.
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-            Uma stack tecnolÃ³gica robusta, pronta para escalar: rastreamento em tempo
-            real, IA, mapas vivos, estabilidade e velocidade em uma Ãºnica plataforma.
+            Uma stack tecnológica robusta, pronta para escalar: rastreamento em tempo
+            real, IA, mapas vivos, estabilidade e velocidade em uma única plataforma.
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             {features.map(({ icon: Icon, t, d }) => (
@@ -220,7 +220,7 @@ function Apps() {
             {[
               { icon: MapPin, t: "App do Cliente", d: "Solicitar corrida, delivery, rastrear pedidos e pagamentos integrados." },
               { icon: Wallet, t: "App do Motorista", d: "Acompanhe ganhos, corridas, performance e mapa em tempo real." },
-              { icon: CreditCard, t: "Pagamentos integrados", d: "CartÃ£o, Pix e carteira digital prontos do dia 1." },
+              { icon: CreditCard, t: "Pagamentos integrados", d: "Cartão, Pix e carteira digital prontos do dia 1." },
             ].map(({ icon: Icon, t, d }) => (
               <div key={t} className="flex gap-4 p-5 rounded-2xl border border-border bg-card/40 hover:border-neon/50 transition">
                 <div className="size-11 shrink-0 rounded-xl bg-neon/10 border border-neon/30 flex items-center justify-center">
@@ -250,7 +250,7 @@ function BrandShowcase() {
         <div className="relative overflow-hidden rounded-[2rem] border border-neon/30 glow-neon bg-card">
           <img
             src={heroBrand}
-            alt="Identidade visual ArkGo com app, serviÃ§os, cores e frota"
+            alt="Identidade visual ArkGo com app, serviços, cores e frota"
             className="w-full object-cover"
             loading="lazy"
           />
@@ -262,11 +262,11 @@ function BrandShowcase() {
 
 function Differentials() {
   const items = [
-    { icon: Zap, t: "OperaÃ§Ã£o rÃ¡pida" },
+    { icon: Zap, t: "Operação rápida" },
     { icon: MapPin, t: "Rastreamento em tempo real" },
     { icon: CreditCard, t: "Pagamentos integrados" },
     { icon: Brain, t: "Tecnologia inteligente" },
-    { icon: Globe2, t: "Plataforma escalÃ¡vel" },
+    { icon: Globe2, t: "Plataforma escalável" },
     { icon: Rocket, t: "Sistema moderno" },
   ];
   return (
@@ -393,9 +393,9 @@ function LeadForm() {
       <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-neon text-sm font-semibold uppercase tracking-[0.2em] mb-3">Entre na fila</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Garanta seu acesso<br/>antecipado Ã  ArkGo.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Garanta seu acesso<br/>antecipado à ArkGo.</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Deixe seu contato para entrar na fila de aquisiÃ§Ã£o do sistema ou tirar dÃºvidas.
+            Deixe seu contato para entrar na fila de aquisição do sistema ou tirar dúvidas.
           </p>
         </div>
 
@@ -423,7 +423,7 @@ function LeadForm() {
             <div className="flex flex-wrap gap-2">
               {([
                 { v: "fila", l: "Entrar na fila" },
-                { v: "duvida", l: "Tirar dÃºvida" },
+                { v: "duvida", l: "Tirar dúvida" },
                 { v: "parceria", l: "Parceria" },
               ] as const).map((o) => (
                 <button
@@ -442,7 +442,7 @@ function LeadForm() {
           </div>
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">Mensagem</label>
-            <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={input} placeholder="Conte mais sobre seu interesse ou dÃºvida..." />
+            <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={input} placeholder="Conte mais sobre seu interesse ou dúvida..." />
           </div>
           <button
             type="submit" disabled={loading}
@@ -451,7 +451,7 @@ function LeadForm() {
             {loading ? "Enviando..." : "Enviar"}
           </button>
           <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5">
-            <CheckCircle2 className="size-3.5 text-neon" /> Seus dados sÃ£o protegidos e usados apenas para contato.
+            <CheckCircle2 className="size-3.5 text-neon" /> Seus dados são protegidos e usados apenas para contato.
           </p>
         </form>
       </div>
@@ -487,7 +487,7 @@ function Footer() {
     <footer className="border-t border-border/60 py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
         <img src={logo} alt="ArkGo" className="h-8" />
-        <p className="text-sm text-muted-foreground">Â© {new Date().getFullYear()} ArkGo Â· Mobilidade completa. VocÃª em movimento.</p>
+        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} ArkGo · Mobilidade completa. Você em movimento.</p>
       </div>
     </footer>
   );
