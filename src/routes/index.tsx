@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Zap, MapPin, CreditCard, Brain, Globe2, Rocket,
@@ -28,6 +28,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Nav() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -47,8 +49,30 @@ function Nav() {
         >
           Entrar na fila
         </a>
-        <button className="md:hidden text-foreground"><Menu /></button>
+        <button 
+          className="md:hidden text-foreground"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <Menu />
+        </button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden px-6 py-4 bg-background/95 backdrop-blur-xl border-b border-border/60 flex flex-col gap-4">
+          <a href="#servicos" className="text-foreground font-medium" onClick={() => setIsMobileMenuOpen(false)}>Serviços</a>
+          <a href="#tecnologia" className="text-foreground font-medium" onClick={() => setIsMobileMenuOpen(false)}>Tecnologia</a>
+          <a href="#apps" className="text-foreground font-medium" onClick={() => setIsMobileMenuOpen(false)}>Apps</a>
+          <a href="#fundador" className="text-foreground font-medium" onClick={() => setIsMobileMenuOpen(false)}>Fundador</a>
+          <a href="#contato" className="text-foreground font-medium" onClick={() => setIsMobileMenuOpen(false)}>Contato</a>
+          <a
+            href="#contato"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="inline-flex appearance-none border-0 items-center justify-center gap-2 bg-neon text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition glow-neon w-full mt-2"
+          >
+            Entrar na fila
+          </a>
+        </div>
+      )}
     </header>
   );
 }
@@ -233,27 +257,6 @@ function Apps() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BrandShowcase() {
-  return (
-    <section className="py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="max-w-2xl mb-10">
-          <p className="text-neon text-sm font-semibold uppercase tracking-[0.2em] mb-3">Identidade ArkGo</p>
-          <h2 className="text-4xl md:text-5xl font-bold">A marca pronta para rodar.</h2>
-        </div>
-        <div className="relative overflow-hidden rounded-[2rem] border border-neon/30 glow-neon bg-card">
-          <img
-            src={heroBrand}
-            alt="Identidade visual ArkGo com app, serviços, cores e frota"
-            className="w-full object-cover"
-            loading="lazy"
-          />
         </div>
       </div>
     </section>
@@ -518,7 +521,6 @@ function Landing() {
         <Services />
         <Tech />
         <Apps />
-        <BrandShowcase />
         <Differentials />
         <Founder />
         <LeadForm />
